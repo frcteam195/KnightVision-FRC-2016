@@ -1,0 +1,6 @@
+Heading:<value-double>;
+OnTarget:<value-booleanString>;
+TargetLeft:<value-booleanString>;
+TargetRight:<value-booleanString>;
+NumberOfParticles:<value-Int32>;
+TargetDistance:<value-double>;
