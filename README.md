@@ -6,6 +6,9 @@ Drop-in vision code for FRC 2016 Stronghold target identification
 
 Use this library to give instant vision targeting to your robot using a Kangaroo MiniPC offboard vision processor and a USB camera. We recommend the Microsoft LifeCam NX-3000. Requires some simple pre-configuration described below.
 
+#Vision System Overview
+This vision system uses a very simple method to calculate the angle deviation from the camera being on center to the goal. The goals are outlined in retro-reflective tape, which will reflect light shined at it back to the source. This is helpful for identifying a target, since it will give us something the camera can look for. In order for this to work properly, you will need a ring of LEDs around the camera so the target will be able to shine light back into the camera lens. We recommend the color green since the field has the least amount of green light (other colors of light are more prominent). The exposure and brightness properties of the camera are all set to minimum and the white balance is adjusted to best filter out fluorescent lighting. Then the image is processed using NI's Vision Assistant software in order to identify the target based on the chosen LEDs. Once the target is identified, the deviation from the center of the target to the center of the camera frame is calculated. This % variance is then multiplied by the field of view of the camera in order to determine the deviation in degrees. This entire process is done inside our KnightVision.exe app. This provides a layer of abstraction to the user so that the process of vision targeting is simplified.
+
 #Getting Started with KnightVision
 
 <ol>
@@ -37,9 +40,16 @@ Next, you must configure the camera's horizontal field of view in the INI file. 
 Now that the camera is calibrated, you can make adjustments to the particle filter size and acceptable target size parameters. These parameters are able to be modified in the NI Vision Script so you can see the results. These values are really only useful if you wish to change the resolution from 640x360 to another setting. If you change the resolution, make sure to recalibrate these values, or the targets will not detect properly.<br><br>
 </li>
 <li>
-Lastly, the AllowedDeviation and HorizontalOffset parameters in the INI must be adjusted for your robot. AllowedDeviation is a parameter that filters when the OnTarget parameter is set to true. This is the number in degrees that the robot is allowed to be +- away from the center of the target. We have found +- 0.47 deg to be an accurate value from shooting almost anywhere on the field. HorizontalOffset is used to shift the center of the image (if your camera is not centered on the robot and the target is not identifying on center correctly). This is a software adjustment for moving the center of the camera frame.<br><br>
+Lastly, the AllowedDeviation and HorizontalOffset parameters in the INI must be adjusted for your robot. AllowedDeviation is a parameter that filters when the OnTarget parameter is set to true. This is the number in degrees that the robot is allowed to be +- away from the center of the target. We have found +- 0.47 deg to be an accurate value from shooting almost anywhere on the field. HorizontalOffset is used to shift the center of the image (if your camera is not centered on the robot and the target is not identifying on center correctly). This is a software adjustment for moving the center of the camera frame.
 </li>
 </ul>
 </p>
+</li>
+<li>
+<h3>Receiving Values on the RoboRIO</h3>
+<p><ul>
+<li>
+The libraries above are provided in each language for receiving the vision data from KnightVision. The libraries may need slight modification to be compatible with your robot source code. Use these as examples to see how to receive data from KnightVision. What you do with the data that comes in is up to you. We recommend using a <a href="http://www.pdocs.kauailabs.com/navx-mxp/">NavX MXP Gyro</a> running at 100Hz as a sensor input to a PID loop used to control your drivetrain turning in order to target the goal. Auto-shooting is possible using the OnTarget boolean value. When using this feature, we recommend using a settle counter so that the robot must be "OnTarget" for x amount of time before shooting, in order to increase shot accuracy.</li>
+</ul></p>
 </li>
 </ol>
