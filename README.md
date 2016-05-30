@@ -13,7 +13,7 @@ This vision system uses a very simple method to calculate the angle deviation fr
 
 <ol>
 <li>
-<h3>Kangaroo Prequirements</h3>
+<h3>Kangaroo Prerequisites</h3>
 <p><ul>
 <li>This project is dependent upon running the vision app on a <a href="http://www.kangaroo.cc/">Kangaroo MiniPC</a>. The KnightVision.exe app runs on this offboard computer and uses a USB camera and a USB to ethernet adapter to send a UDP stream of relevant data to the RoboRIO to be processed for targeting. It is designed for the <a href="http://www.amazon.com/dp/B008ZVRAQS/ref=pd_lpo_sbs_dp_ss_1?pf_rd_p=1944687762&pf_rd_s=lpo-top-stripe-1&pf_rd_t=201&pf_rd_i=B004ETQHDM&pf_rd_m=ATVPDKIKX0DER&pf_rd_r=1A5ZD9HEMA93AV7844PT">Microsoft HD3000 LifeCam</a> and the <a href="http://www.amazon.com/Cable-Matters-SuperSpeed-Gigabit-Ethernet/dp/B00BBD7NFU?ie=UTF8&psc=1&redirect=true&ref_=oh_aui_detailpage_o05_s00">AX88179 USB to Ethernet Adapter</a>.<br><br></li>
 
